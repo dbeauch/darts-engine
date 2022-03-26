@@ -1,22 +1,43 @@
 player = input("Enter a player: ")
 
-boardState = [0, 0, 0, 0, 0, 0, 0]
+boardState = [0, 0, 0, 0, 0, 0, 0, 0]
 
 
 def updateBoard(throw):
     if throw == "15":
+        if boardState[0] == 3:
+            boardState[7] += 15
+            return boardState
         boardState[0] += 1
     elif throw == "16":
+        if boardState[1] == 3:
+            boardState[7] += 16
+            return boardState
         boardState[1] += 1
     elif throw == "17":
+        if boardState[2] == 3:
+            boardState[7] += 17
+            return boardState
         boardState[2] += 1
     elif throw == "18":
+        if boardState[3] == 3:
+            boardState[7] += 18
+            return boardState
         boardState[3] += 1
     elif throw == "19":
+        if boardState[4] == 3:
+            boardState[7] += 19
+            return boardState
         boardState[4] += 1
     elif throw == "20":
+        if boardState[5] == 3:
+            boardState[7] += 20
+            return boardState
         boardState[5] += 1
     elif throw == "25":
+        if boardState[6] == 3:
+            boardState[7] += 25
+            return boardState
         boardState[6] += 1
     else:
         return boardState
@@ -36,13 +57,14 @@ def printBoard():
     print("19:", boardState[4])
     print("20:", boardState[5])
     print("Bullseye:", boardState[6])
+    print("Score:", boardState[7])
 
 
 def playGame():
-    while boardState != "3333333":
+    while boardState != :
         throw()
         printBoard()
-    print("You win!")
+    print(player + " wins!")
 
 
 playGame()
