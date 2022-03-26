@@ -2,6 +2,7 @@ import crick_game
 
 def findTarget1(boardState):
     target = 1
+    target += 1
     #for target in range(0, len(boardState)):
     return target
 
