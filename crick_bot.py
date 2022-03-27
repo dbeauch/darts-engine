@@ -2,8 +2,8 @@
 import math
 import random
 board_radius = 6.75
-test_boardState1 = [1, 3, 3, 3, 1, 3, 3, 15]
-test_boardState2 = [2, 2, 3, 3, 3, 3, 3, 15]
+test_boardState1 = [3, 3, 3, 3, 3, 3, 2, 15]
+test_boardState2 = [2, 2, 3, 3, 3, 3, 2, 15]
 
 
 # def hit(pos):
@@ -62,7 +62,7 @@ def getValue(target):
 
 
 def findTarget1(boardState1, boardState2):
-    target = 6
+    target = 5
     for index in range(len(boardState1)-2, -1, -1):
         if boardState1[index] < 3:
             target = index
@@ -82,19 +82,41 @@ def findTarget3(boardState1, boardState2):
     target = 3
     return target
 
+def easy_calculateShot(target):
+    if target <= 20:
+        if random.random() <= 0.15:
+            return target
+        else:
+            return 0
+    else:
+        if random.random() <= 0.05:
+            return target
+        else:
+            return 0
 
-def calculateShot(target):
+def medium_calculateShot(target):
     if target <= 20:
         if random.random() <= 0.25:
             return target
         else:
             return 0
     else:
-        if random.random() <= 0.1:
+        if random.random() <= 0.10:
             return target
         else:
             return 0
 
+def hard_calculateShot(target):
+    if target <= 20:
+        if random.random() <= 0.99:
+            return target
+        else:
+            return 0
+    else:
+        if random.random() <= 0.15:
+            return target
+        else:
+            return 0
 
-print(calculateShot(findTarget2(test_boardState1, test_boardState2)))
+print(findTarget1(test_boardState1, test_boardState2))
 
