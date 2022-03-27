@@ -21,52 +21,52 @@ def updateBoard(value):
     else:
         boardHistory2.append(boardState2)
     if value == "15":
-        if (states[thrower][0] == 3) & (states[1 if thrower == 0 else 0][0] != 3):
+        if (states[thrower][0] == 3) and (states[1 if thrower == 0 else 0][0] != 3):
             states[thrower][7] += 15
             return states[thrower]
-        elif (states[thrower][0] == 3) & (states[1 if thrower == 0 else 0][0] == 3):
+        elif (states[thrower][0] == 3) and (states[1 if thrower == 0 else 0][0] == 3):
             return states[thrower]
         states[thrower][0] += 1
     elif value == "16":
-        if (states[thrower][1] == 3) & (states[1 if thrower == 0 else 0][1] != 3):
+        if (states[thrower][1] == 3) and (states[1 if thrower == 0 else 0][1] != 3):
             states[thrower][7] += 16
             return states[thrower]
-        elif (states[thrower][1] == 3) & (states[1 if thrower == 0 else 0][1] == 3):
+        elif (states[thrower][1] == 3) and (states[1 if thrower == 0 else 0][1] == 3):
             return states[thrower]
         states[thrower][1] += 1
     elif value == "17":
-        if (states[thrower][2] == 3) & (states[1 if thrower == 0 else 0][2] != 3):
+        if (states[thrower][2] == 3) and (states[1 if thrower == 0 else 0][2] != 3):
             states[thrower][7] += 17
             return states[thrower]
-        elif (states[thrower][2] == 3) & (states[1 if thrower == 0 else 0][2] == 3):
+        elif (states[thrower][2] == 3) and (states[1 if thrower == 0 else 0][2] == 3):
             return states[thrower]
         states[thrower][2] += 1
     elif value == "18":
-        if (states[thrower][3] == 3) & (states[1 if thrower == 0 else 0][3] != 3):
+        if (states[thrower][3] == 3) and (states[1 if thrower == 0 else 0][3] != 3):
             states[thrower][7] += 18
             return states[thrower]
-        elif (states[thrower][3] == 3) & (states[1 if thrower == 0 else 0][3] == 3):
+        elif (states[thrower][3] == 3) and (states[1 if thrower == 0 else 0][3] == 3):
             return states[thrower]
         states[thrower][3] += 1
     elif value == "19":
-        if (states[thrower][4] == 3) & (states[1 if thrower == 0 else 0][4] != 3):
+        if (states[thrower][4] == 3) and (states[1 if thrower == 0 else 0][4] != 3):
             states[thrower][7] += 19
             return states[thrower]
-        elif (states[thrower][4] == 3) & (states[1 if thrower == 0 else 0][4] == 3):
+        elif (states[thrower][4] == 3) and (states[1 if thrower == 0 else 0][4] == 3):
             return states[thrower]
         states[thrower][4] += 1
     elif value == "20":
-        if (states[thrower][5] == 3) & (states[1 if thrower == 0 else 0][5] != 3):
+        if (states[thrower][5] == 3) and (states[1 if thrower == 0 else 0][5] != 3):
             states[thrower][7] += 20
             return states[thrower]
-        elif (states[thrower][5] == 3) & (states[1 if thrower == 0 else 0][5] == 3):
+        elif (states[thrower][5] == 3) and (states[1 if thrower == 0 else 0][5] == 3):
             return states[thrower]
         states[thrower][5] += 1
     elif value == "25":
-        if (states[thrower][6] == 3) & (states[1 if thrower == 0 else 0][6] != 3):
+        if (states[thrower][6] == 3) and (states[1 if thrower == 0 else 0][6] != 3):
             states[thrower][7] += 25
             return states[thrower]
-        elif (states[thrower][6] == 3) & (states[1 if thrower == 0 else 0][6] == 3):
+        elif (states[thrower][6] == 3) and (states[1 if thrower == 0 else 0][6] == 3):
             return states[thrower]
         states[thrower][6] += 1
     return 0
