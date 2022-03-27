@@ -36,14 +36,14 @@ button25 = tk.Button(text="Bullseye", width=10, command=throw_25)
 button25.grid(row=6, column=0, sticky="n")
 
 for i in range(0, 7):
-    label = tk.Label(text=boardState1[i])
+    label = tk.Label(textvariable=boardState1[i])
     if i == 0:
         label.grid(row=i, column=1, sticky="s")
     else:
         label.grid(row=i, column=1, sticky="n")
 
 for i in range(0, 7):
-    label = tk.Label(text=boardState2[i])
+    label = tk.Label(textvariable=boardState2[i])
     if i == 0:
         label.grid(row=i, column=2, sticky="s")
     else:
