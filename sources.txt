@@ -1,0 +1,1 @@
+matplotlib was used from the python numpy library in order to plot the dartboard and hits made by the dart computer.
