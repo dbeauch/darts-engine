@@ -1,10 +1,24 @@
 #import crick_game
 import math
 import random
+import numpy as np
+from matplotlib import pyplot as plt
 board_radius = 6.75
-test_boardState1 = [3, 3, 3, 3, 3, 3, 2, 15]
+test_boardState1 = [3, 3, 3, 3, 1, 3, 3, 15]
 test_boardState2 = [2, 2, 3, 3, 3, 3, 2, 15]
 
+
+theta = np.linspace(0, 2 * np.pi, 100)
+
+radius = 5
+
+x = radius * np.cos(theta)
+y = radius * np.sin(theta)
+
+plt.plot(x, y)
+plt.axis('equal')
+plt.title('Circle')
+plt.show()
 
 # def hit(pos):
 #     test_boardState1[pos] += 1
@@ -79,8 +93,12 @@ def findTarget2(boardState1, boardState2):
     return getValue(target)
 
 def findTarget3(boardState1, boardState2):
-    target = 3
-    return target
+    target = 6
+    for index in range(len(boardState1) - 1, -1, -1):
+        if boardState2[index] == 3 and boardState1[index] < 3:
+            target = index
+            break
+    return getValue(target)
 
 def easy_calculateShot(target):
     if target <= 20:
@@ -118,5 +136,5 @@ def hard_calculateShot(target):
         else:
             return 0
 
-print(findTarget1(test_boardState1, test_boardState2))
+print(findTarget3(test_boardState1, test_boardState2))
 
