@@ -107,7 +107,7 @@ def printBoard():
     print("Score:", states[p][7])
 
 
-def playGame():
+def twoPlayers():
     global subTurn
     global turn
     while (boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]) and (boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]):
@@ -142,4 +142,57 @@ def playGame():
         print(player1 + " wins!")
 
 
-playGame()
+def onePlayer():
+    global subTurn
+    global turn
+    while (boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]) and (boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]):
+        if turn % 2 == 0:
+            throw()
+            subTurn += 1
+            if subTurn % 3 == 0:
+                subTurn -= 3
+                turn += 1
+        else:
+            AIthrow()
+            subTurn += 1
+            if subTurn % 3 == 0:
+                subTurn -= 3
+                turn += 1
+    if boardState1[0:7] == [3, 3, 3, 3, 3, 3, 3]:
+        while boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]:
+            if boardState1[7] >= boardState2[7]:
+                print(player1 + " wins!")
+                return
+            else:
+                if turn % 2 == 0:
+                    throw()
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+                else:
+                    AIthrow()
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+        print("The computer wins!")
+    else:
+        while boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]:
+            if boardState2[7] >= boardState1[7]:
+                print("The computer wins!")
+                return
+            else:
+                if turn % 2 == 0:
+                    throw()
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+                else:
+                    AIthrow()
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+        print(player1 + " wins!")
