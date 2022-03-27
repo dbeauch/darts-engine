@@ -1,26 +1,100 @@
-import crick_game
+#import crick_game
+import math
+import random
 board_radius = 6.75
-
-class Bot:
-    error = 0.0
-
-    def _init_(self, error):
-        self.error = error
+test_boardState1 = [1, 3, 3, 3, 1, 3, 3, 15]
+test_boardState2 = [2, 2, 3, 3, 3, 3, 3, 15]
 
 
-def findTarget1(boardState):
-    target = 1
-    target += 1
-    #for target in range(0, len(boardState)):
-    return target
+# def hit(pos):
+#     test_boardState1[pos] += 1
+#     return test_boardState1
 
 
-def findTarget2(boardState):
-    target = 2
-    return target
+#def miss():
+#    return test_boardState1
 
-def findTarget3(boardState):
+
+# def convertToX(rx, ty):
+#     return rx*math.cos(ty)
+#
+#
+# def convertToY(rx, ty):
+#     return rx*math.sin(ty)
+#
+#
+# def convertToR(rx, ty):
+#     return math.sqrt(math.pow(rx, 2) + math.pow(ty, 2))
+#
+#
+# def convertToTheta(rx, ty):
+#     result = math.atan(ty / rx)
+#     if result < 0.0:
+#         result += 2*math.pi
+#     return result
+#
+#
+# class Coord:
+#     radius = 0.0
+#     theta = 0.0
+#     radial = True
+#     x = 0.0
+#     y = 0.0
+#
+#     def _init_(self, radial, rx, ty):
+#         if (radial):
+#             self.radius = rx
+#             self.theta = ty
+#             self.x = convertToX(rx, ty)
+#             self.y = convertToY(rx, ty)
+#         else:
+#             self.x = rx
+#             self.y = ty
+#             self.radius = convertToR(rx, ty)
+#             self.theta = convertToTheta(rx, ty)
+
+
+def getValue(target):
+    if target == 6:
+        return 25
+    else:
+        return target + 15
+
+
+def findTarget1(boardState1, boardState2):
+    target = 6
+    for index in range(len(boardState1)-2, -1, -1):
+        if boardState1[index] < 3:
+            target = index
+            break
+    return getValue(target)
+
+
+def findTarget2(boardState1, boardState2):
+    target = 6
+    for index in range(len(boardState1) - 1, -1, -1):
+        if boardState1[index] < 3:
+            target = index
+            break
+    return getValue(target)
+
+def findTarget3(boardState1, boardState2):
     target = 3
     return target
 
-print(crick_game.boardState)
+
+def calculateShot(target):
+    if target <= 20:
+        if random.random() <= 0.25:
+            return target
+        else:
+            return 0
+    else:
+        if random.random() <= 0.1:
+            return target
+        else:
+            return 0
+
+
+print(calculateShot(findTarget2(test_boardState1, test_boardState2)))
+
