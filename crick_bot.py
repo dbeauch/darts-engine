@@ -4,10 +4,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 radius = 170
-test_boardState1 = [3, 3, 3, 3, 3, 3, 2, 15]
-test_boardState2 = [2, 2, 3, 3, 3, 3, 3, 15]
 
 
+# class to make it easier to convert between cartesian and polar coordinates
 class Coord:
     radius = 0.0
     theta = 0.0
@@ -44,19 +43,7 @@ def convertToTheta(coord):
     result = math.atan2(coord.y, coord.x)
     if result < 0.0:
         result += 2 * math.pi
-    # if coord.y < 0 and coord.x < 0:
-    #    result += math.pi
-    # if result > 2 * math.pi:
-    #    result -= 2 * math.pi
     return result
-
-
-# Plot board BEN PUT IT HERE
-
-# counter = 10
-# while counter > 0:
-#     plt.plot(random.vonmisesvariate((math.pi)/2, 6), random.vonmisesvariate(math.pi, 1), 'rx')
-#     counter -= 1
 
 
 def getValue(target):
@@ -69,6 +56,7 @@ def getValue(target):
 # default to highest possible scoring target
 
 
+# strategy 1 which is used by the computer
 def findTarget1(state1, state2):
     target = 6
     for index in range(len(state1) - 3, -1, -1):
@@ -83,6 +71,7 @@ def findTarget1(state1, state2):
     return target
 
 
+# strategy 2
 def findTarget2(state1, state2):
     target = 6
     for index in range(len(state2) - 1, -1, -1):
@@ -92,6 +81,7 @@ def findTarget2(state1, state2):
     return target
 
 
+# strategy 3
 def findTarget3(state1, state2):
     target = 6
     for index in range(len(state2) - 1, -1, -1):
@@ -101,48 +91,6 @@ def findTarget3(state1, state2):
     return target
 
 
-# def easy_calculateShot(target):
-#     target = getValue(target)
-#     if target <= 20:
-#         if random.random() <= 0.15:
-#             return target
-#         else:
-#             return 0
-#     else:
-#         if random.random() <= 0.05:
-#             return target
-#         else:
-#             return 0
-#
-#
-# def medium_calculateShot(target):
-#     target = getValue(target)
-#     if target <= 20:
-#         if random.random() <= 0.25:
-#             return target
-#         else:
-#             return 0
-#     else:
-#         if random.random() <= 0.10:
-#             return target
-#         else:
-#             return 0
-#
-#
-# def hard_calculateShot(target):
-#     target = getValue(target)
-#     if target <= 20:
-#         if random.random() <= 0.99:
-#             return target
-#         else:
-#             return 0
-#     else:
-#         if random.random() <= 0.15:
-#             return target
-#         else:
-#             return 0
-
-
 tripRadius = 103
 targetList = [Coord(True, tripRadius, 9 * math.pi / 5), Coord(True, tripRadius, 6 * math.pi / 5),
               Coord(True, tripRadius, 8 * math.pi / 5), Coord(True, tripRadius, 3 * math.pi / 10),
@@ -150,10 +98,10 @@ targetList = [Coord(True, tripRadius, 9 * math.pi / 5), Coord(True, tripRadius, 
               Coord(True, 0, math.pi / 2)]
 
 
+# calculates if a given coordinate falls within the specified regions 20, 19, 18, 17, 16, 15, bullseye, or multiples
 def calculateShot(coord):
     result = ""
     hit = False
-    #print(coord.radius, " ", coord.theta)
     if coord.radius <= radius:
         if 9 * math.pi / 20 <= coord.theta <= 11 * math.pi / 20:
             result += "20"
@@ -185,18 +133,13 @@ def calculateShot(coord):
     return result
 
 
-stdevX = 15
-stdevY = 15
-
-
-def shoot(boardState1, boardState2):
-    #print(boardState1, boardState2)
+# adds randomality to each throw based on the difficulty setting
+def shoot(boardState1, boardState2, difficulty):
     target = findTarget1(boardState1, boardState2)
     targetCoord = targetList[target]
-    newX = random.gauss(targetCoord.x, stdevX)
-    newY = random.gauss(targetCoord.y, stdevY)
+    newX = random.gauss(targetCoord.x, (100 - difficulty) / 3)
+    newY = random.gauss(targetCoord.y, (100 - difficulty) / 3)
     plt.plot(newX, newY, "rx")
     newCoord = Coord(False, newX, newY)
-    # print(newCoord.x, newCoord.y)
     result = calculateShot(newCoord)
     return result
