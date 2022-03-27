@@ -1,70 +1,183 @@
-player = input("Enter a player: ")
+player1 = input("Enter player 1: ")
+player2 = input("Enter player 2: ")
 
-boardState = [0, 0, 0, 0, 0, 0, 0, 0]
+boardState1 = [2, 3, 3, 3, 3, 3, 3, 0]
+boardState2 = [3, 3, 3, 3, 3, 3, 2, 0]
+turn = 0
+subTurn = 0
 
 
 def updateBoard(throw):
-    if throw == "15":
-        if boardState[0] == 3:
-            boardState[7] += 15
-            return boardState
-        boardState[0] += 1
-    elif throw == "16":
-        if boardState[1] == 3:
-            boardState[7] += 16
-            return boardState
-        boardState[1] += 1
-    elif throw == "17":
-        if boardState[2] == 3:
-            boardState[7] += 17
-            return boardState
-        boardState[2] += 1
-    elif throw == "18":
-        if boardState[3] == 3:
-            boardState[7] += 18
-            return boardState
-        boardState[3] += 1
-    elif throw == "19":
-        if boardState[4] == 3:
-            boardState[7] += 19
-            return boardState
-        boardState[4] += 1
-    elif throw == "20":
-        if boardState[5] == 3:
-            boardState[7] += 20
-            return boardState
-        boardState[5] += 1
-    elif throw == "25":
-        if boardState[6] == 3:
-            boardState[7] += 25
-            return boardState
-        boardState[6] += 1
+    if turn % 2 == 0:
+        if throw == "15":
+            if (boardState1[0] == 3) & (boardState2[0] != 3):
+                boardState1[7] += 15
+                return boardState1
+            elif (boardState1[0] == 3) & (boardState2[0] == 3):
+                return boardState1
+            boardState1[0] += 1
+        elif throw == "16":
+            if (boardState1[1] == 3) & (boardState2[1] != 3):
+                boardState1[7] += 16
+                return boardState1
+            elif (boardState1[1] == 3) & (boardState2[1] == 3):
+                return boardState1
+            boardState1[1] += 1
+        elif throw == "17":
+            if (boardState1[2] == 3) & (boardState2[2] != 3):
+                boardState1[7] += 17
+                return boardState1
+            elif (boardState1[2] == 3) & (boardState2[2] == 3):
+                return boardState1
+            boardState1[2] += 1
+        elif throw == "18":
+            if (boardState1[3] == 3) & (boardState2[3] != 3):
+                boardState1[7] += 18
+                return boardState1
+            elif (boardState1[3] == 3) & (boardState2[3] == 3):
+                return boardState1
+            boardState1[3] += 1
+        elif throw == "19":
+            if (boardState1[4] == 3) & (boardState2[4] != 3):
+                boardState1[7] += 19
+                return boardState1
+            elif (boardState1[4] == 3) & (boardState2[4] == 3):
+                return boardState1
+            boardState1[4] += 1
+        elif throw == "20":
+            if (boardState1[5] == 3) & (boardState2[5] != 3):
+                boardState1[7] += 20
+                return boardState1
+            elif (boardState1[5] == 3) & (boardState2[5] == 3):
+                return boardState1
+            boardState1[5] += 1
+        elif throw == "25":
+            if (boardState1[6] == 3) & (boardState2[6] != 3):
+                boardState1[7] += 25
+                return boardState1
+            elif (boardState1[6] == 3) & (boardState2[6] == 3):
+                return boardState1
+            boardState1[6] += 1
+        else:
+            return boardState1
     else:
-        return boardState
-    return boardState
+        if throw == "15":
+            if (boardState2[0] == 3) & (boardState1[0] != 3):
+                boardState2[7] += 15
+                return boardState2
+            elif (boardState2[0] == 3) & (boardState1[0] == 3):
+                return boardState2
+            boardState2[0] += 1
+        elif throw == "16":
+            if (boardState2[1] == 3) & (boardState1[1] != 3):
+                boardState2[7] += 16
+                return boardState2
+            elif (boardState2[1] == 3) & (boardState1[1] == 3):
+                return boardState2
+            boardState2[1] += 1
+        elif throw == "17":
+            if (boardState2[2] == 3) & (boardState1[2] != 3):
+                boardState2[7] += 17
+                return boardState2
+            elif (boardState2[2] == 3) & (boardState1[2] == 3):
+                return boardState2
+            boardState2[2] += 1
+        elif throw == "18":
+            if (boardState2[3] == 3) & (boardState1[3] != 3):
+                boardState2[7] += 18
+                return boardState2
+            elif (boardState2[3] == 3) & (boardState1[3] == 3):
+                return boardState2
+            boardState2[3] += 1
+        elif throw == "19":
+            if (boardState2[4] == 3) & (boardState1[4] != 3):
+                boardState2[7] += 19
+                return boardState2
+            elif (boardState2[4] == 3) & (boardState1[4] == 3):
+                return boardState2
+            boardState2[4] += 1
+        elif throw == "20":
+            if (boardState2[5] == 3) & (boardState1[5] != 3):
+                boardState2[7] += 20
+                return boardState2
+            elif (boardState2[5] == 3) & (boardState1[5] == 3):
+                return boardState2
+            boardState2[5] += 1
+        elif throw == "25":
+            if (boardState2[6] == 3) & (boardState1[6] != 3):
+                boardState2[7] += 25
+                return boardState2
+            elif (boardState2[6] == 3) & (boardState1[6] == 3):
+                return boardState2
+            boardState2[6] += 1
+        else:
+            return boardState2
+    return 0
 
 
 def throw():
     throw = input("Throw Value: ")
     updateBoard(throw)
+    printBoard()
 
 
 def printBoard():
-    print("15:", boardState[0])
-    print("16:", boardState[1])
-    print("17:", boardState[2])
-    print("18:", boardState[3])
-    print("19:", boardState[4])
-    print("20:", boardState[5])
-    print("Bullseye:", boardState[6])
-    print("Score:", boardState[7])
+    if turn % 2 == 0:
+        print(player1 + ":")
+        print("15:", boardState1[0])
+        print("16:", boardState1[1])
+        print("17:", boardState1[2])
+        print("18:", boardState1[3])
+        print("19:", boardState1[4])
+        print("20:", boardState1[5])
+        print("Bulls eye:", boardState1[6])
+        print("Score:", boardState1[7])
+    else:
+        print(player2 + ":")
+        print("15:", boardState2[0])
+        print("16:", boardState2[1])
+        print("17:", boardState2[2])
+        print("18:", boardState2[3])
+        print("19:", boardState2[4])
+        print("20:", boardState2[5])
+        print("Bulls eye:", boardState2[6])
+        print("Score:", boardState2[7])
 
 
 def playGame():
-    while boardState[0:7] != [3, 3, 3, 3, 3, 3, 3]:
+    while (boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]) & (boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]):
         throw()
-        printBoard()
-    print(player + " wins!")
+        global subTurn
+        global turn
+        subTurn += 1
+        if subTurn % 3 == 0:
+            subTurn -= 3
+            turn += 1
+    if boardState1[0:7] == [3, 3, 3, 3, 3, 3, 3]:
+        while boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]:
+            if boardState1[7] >= boardState2[7]:
+                print(player1 + " wins!")
+                break
+            else:
+                throw()
+                subTurn += 1
+                if subTurn % 3 == 0:
+                    subTurn -= 3
+                    turn += 1
+        print(player2 + " wins!")
+    else:
+        while boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]:
+            if boardState2[7] >= boardState1[7]:
+                print(player2 + " wins!")
+                return
+            else:
+                throw()
+                subTurn += 1
+                if subTurn % 3 == 0:
+                    subTurn -= 3
+                    turn += 1
+        print(player1 + " wins!")
+
 
 
 playGame()

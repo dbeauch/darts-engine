@@ -23,4 +23,4 @@ def findTarget3(boardState):
     target = 3
     return target
 
-print(crick_game.boardState)
+print(crick_game.boardState1)
