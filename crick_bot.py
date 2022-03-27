@@ -137,4 +137,3 @@ def hard_calculateShot(target):
             return 0
 
 print(findTarget3(test_boardState1, test_boardState2))
-
