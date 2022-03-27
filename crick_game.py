@@ -109,6 +109,7 @@ def printBoard():
     print("Score:", states[p][7])
 
 
+# Runs a game where player1 goes first for three throws followed by player2 for three throws until one party wins
 def twoPlayers():
     global subTurn
     global turn
@@ -146,7 +147,8 @@ def twoPlayers():
         print(player1 + " wins!")
 
 
-def onePlayer():
+# Runs a game where the player goes first for three throws followed by the computer for three throws until one party wins
+def onePlayer(difficulty):
     global subTurn
     global turn
     global boardState1
@@ -159,7 +161,7 @@ def onePlayer():
                 subTurn -= 3
                 turn += 1
         else:
-            throw(shoot(boardState1, boardState2))
+            throw(shoot(boardState1, boardState2, difficulty))
             subTurn += 1
             if subTurn % 3 == 0:
                 subTurn -= 3
@@ -177,7 +179,7 @@ def onePlayer():
                         subTurn -= 3
                         turn += 1
                 else:
-                    throw(shoot(boardState1, boardState2))
+                    throw(shoot(boardState1, boardState2, difficulty))
                     subTurn += 1
                     if subTurn % 3 == 0:
                         subTurn -= 3
@@ -197,7 +199,7 @@ def onePlayer():
                         subTurn -= 3
                         turn += 1
                 else:
-                    throw(shoot(boardState1, boardState2))
+                    throw(shoot(boardState1, boardState2, difficulty))
                     subTurn += 1
                     if subTurn % 3 == 0:
                         subTurn -= 3
@@ -291,7 +293,10 @@ if numPlayers != "1":
     twoPlayers()
 else:
     player2 = "Computer"
+    difficulty = int(input("Enter difficulty (1-100): "))
+    while not(0 < difficulty <= 100):
+        difficulty = int(input("Enter difficulty (1-100): "))
     players = [player1, player2]
-    onePlayer()
+    onePlayer(difficulty)
 
 plt.show()
