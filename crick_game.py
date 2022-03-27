@@ -130,7 +130,7 @@ def printBoard():
         print("18:", boardState1[3])
         print("19:", boardState1[4])
         print("20:", boardState1[5])
-        print("Bullseye:", boardState1[6])
+        print("Bulls eye:", boardState1[6])
         print("Score:", boardState1[7])
     else:
         print(player2 + ":")
@@ -140,7 +140,7 @@ def printBoard():
         print("18:", boardState2[3])
         print("19:", boardState2[4])
         print("20:", boardState2[5])
-        print("Bullseye:", boardState2[6])
+        print("Bulls eye:", boardState2[6])
         print("Score:", boardState2[7])
 
 
