@@ -4,6 +4,7 @@ player2 = input("Enter player 2: ")
 boardState1 = [2, 3, 3, 3, 3, 3, 3, 0]
 boardState2 = [3, 3, 3, 3, 3, 3, 2, 0]
 turn = 0
+subTurn = 0
 
 
 def updateBoard(throw):
@@ -114,10 +115,10 @@ def updateBoard(throw):
     return 0
 
 
-def throws():
-    for i in range (0, 3):
-        throw = input("Throw Value: ")
-        updateBoard(throw)
+def throw():
+    throw = input("Throw Value: ")
+    updateBoard(throw)
+    printBoard()
 
 
 def printBoard():
@@ -145,19 +146,24 @@ def printBoard():
 
 def playGame():
     while (boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]) & (boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]):
-        throws()
-        printBoard()
+        throw()
+        global subTurn
         global turn
-        turn += 1
+        subTurn += 1
+        if subTurn % 3 == 0:
+            subTurn -= 3
+            turn += 1
     if boardState1[0:7] == [3, 3, 3, 3, 3, 3, 3]:
         while boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]:
             if boardState1[7] >= boardState2[7]:
                 print(player1 + " wins!")
                 break
             else:
-                throws()
-                printBoard()
-                turn += 1
+                throw()
+                subTurn += 1
+                if subTurn % 3 == 0:
+                    subTurn -= 3
+                    turn += 1
         print(player2 + " wins!")
     else:
         while boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]:
@@ -165,9 +171,11 @@ def playGame():
                 print(player2 + " wins!")
                 return
             else:
-                throws()
-                printBoard()
-                turn += 1
+                throw()
+                subTurn += 1
+                if subTurn % 3 == 0:
+                    subTurn -= 3
+                    turn += 1
         print(player1 + " wins!")
 
 
