@@ -1,8 +1,8 @@
-player1 = input("Player 1 name: ")
-player2 = input("Player 2 name: ")
+player1 = "Kieran"
+player2 = "Ethan"
 players = [player1, player2]
 
-boardState1 = [0, 0, 0, 0, 0, 0, 0, 0]
+boardState1 = [0, 0, 0, 3, 0, 0, 0, 0]
 boardState2 = [0, 0, 0, 0, 0, 0, 0, 0]
 states = [boardState1, boardState2]
 
@@ -72,8 +72,8 @@ def updateBoard(value):
     return 0
 
 
-def throw():
-    score = input("Throw Value: ")  # From gui
+def throw(x):
+    score = x  # From gui
     space = -1
     for i in range(len(score)):
         if score[i] == ' ':
