@@ -1,8 +1,10 @@
-player1 = "Kieran"
-player2 = "Ethan"
+from crick_bot import *
+
+player1 = input("Player 1 name: ")
+player2 = input("Player 2 name: ")
 players = [player1, player2]
 
-boardState1 = [0, 0, 0, 3, 0, 0, 0, 0]
+boardState1 = [0, 0, 0, 0, 0, 0, 0, 0]
 boardState2 = [0, 0, 0, 0, 0, 0, 0, 0]
 states = [boardState1, boardState2]
 
@@ -16,10 +18,6 @@ boardHistories = [boardHistory1, boardHistory2]
 
 def updateBoard(value):
     thrower = turn % 2
-    if thrower == 0:
-        boardHistory1.append(boardState1)
-    else:
-        boardHistory2.append(boardState2)
     if value == "15":
         if (states[thrower][0] == 3) and (states[1 if thrower == 0 else 0][0] != 3):
             states[thrower][7] += 15
@@ -72,8 +70,10 @@ def updateBoard(value):
     return 0
 
 
-def throw(x):
-    score = x  # From gui
+def throw(score):
+    global boardState1
+    global boardState2
+    thrower = turn % 2
     space = -1
     for i in range(len(score)):
         if score[i] == ' ':
@@ -83,15 +83,21 @@ def throw(x):
     if space != -1:
         value = score[:space]
         multiplier = int(score[space + 1:])
+    if thrower == 0:
+        boardHistory1.append(boardState1)
+    else:
+        boardHistory2.append(boardState2)
     for i in range(multiplier):
         updateBoard(value)
     printBoard()
 
 
 def undo():  # Watch out, this is permanent
+    global subTurn
     p = turn % 2
     states[p] = boardHistories[p][-2]
     boardHistories[p] = boardHistories[p][start:-1]
+    subTurn -= 1
 
 
 def printBoard():
@@ -110,8 +116,10 @@ def printBoard():
 def twoPlayers():
     global subTurn
     global turn
+    global boardState1
+    global boardState2
     while (boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]) and (boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]):
-        throw()
+        throw(input("What number? "))
         subTurn += 1
         if subTurn % 3 == 0:
             subTurn -= 3
@@ -122,7 +130,7 @@ def twoPlayers():
                 print(player1 + " wins!")
                 return
             else:
-                throw()
+                throw(input("What number? "))
                 subTurn += 1
                 if subTurn % 3 == 0:
                     subTurn -= 3
@@ -134,7 +142,7 @@ def twoPlayers():
                 print(player2 + " wins!")
                 return
             else:
-                throw()
+                throw(input("What number? "))
                 subTurn += 1
                 if subTurn % 3 == 0:
                     subTurn -= 3
@@ -145,15 +153,17 @@ def twoPlayers():
 def onePlayer():
     global subTurn
     global turn
+    global boardState1
+    global boardState2
     while (boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]) and (boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]):
         if turn % 2 == 0:
-            throw()
+            throw(input("What number? "))
             subTurn += 1
             if subTurn % 3 == 0:
                 subTurn -= 3
                 turn += 1
         else:
-            AIthrow()
+            throw(shoot(boardState1, boardState2))
             subTurn += 1
             if subTurn % 3 == 0:
                 subTurn -= 3
@@ -165,13 +175,13 @@ def onePlayer():
                 return
             else:
                 if turn % 2 == 0:
-                    throw()
+                    throw(input("What number? "))
                     subTurn += 1
                     if subTurn % 3 == 0:
                         subTurn -= 3
                         turn += 1
                 else:
-                    AIthrow()
+                    throw(shoot(boardState1, boardState2))
                     subTurn += 1
                     if subTurn % 3 == 0:
                         subTurn -= 3
@@ -184,15 +194,18 @@ def onePlayer():
                 return
             else:
                 if turn % 2 == 0:
-                    throw()
+                    throw(input("What number? "))
                     subTurn += 1
                     if subTurn % 3 == 0:
                         subTurn -= 3
                         turn += 1
                 else:
-                    AIthrow()
+                    throw(shoot(boardState1, boardState2))
                     subTurn += 1
                     if subTurn % 3 == 0:
                         subTurn -= 3
                         turn += 1
         print(player1 + " wins!")
+
+
+onePlayer()

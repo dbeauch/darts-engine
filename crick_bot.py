@@ -1,4 +1,3 @@
-# import crick_game
 import math
 import random
 import numpy as np
@@ -45,9 +44,9 @@ def convertToTheta(coord):
     result = math.atan2(coord.y, coord.x)
     if result < 0.0:
         result += 2 * math.pi
-   # if coord.y < 0 and coord.x < 0:
+    # if coord.y < 0 and coord.x < 0:
     #    result += math.pi
-    #if result > 2 * math.pi:
+    # if result > 2 * math.pi:
     #    result -= 2 * math.pi
     return result
 
@@ -149,28 +148,28 @@ def getValue(target):
 # default to highest possible scoring target
 
 
-def findTarget1(boardState1, boardState2):
+def findTarget1(state1, state2):
     target = 6
-    for index in range(len(boardState1) - 3, -1, -1):
-        if boardState1[index] < 3:
+    for index in range(len(state2) - 3, -1, -1):
+        if state2[index] < 3:
             target = index
             break
     return target
 
 
-def findTarget2(boardState1, boardState2):
+def findTarget2(state1, state2):
     target = 6
-    for index in range(len(boardState1) - 1, -1, -1):
-        if boardState1[index] < 3:
+    for index in range(len(state2) - 1, -1, -1):
+        if state2[index] < 3:
             target = index
             break
     return target
 
 
-def findTarget3(boardState1, boardState2):
+def findTarget3(state1, state2):
     target = 6
-    for index in range(len(boardState1) - 1, -1, -1):
-        if boardState2[index] == 3 and boardState1[index] < 3:
+    for index in range(len(state2) - 1, -1, -1):
+        if state1[index] == 3 and state2[index] < 3:
             target = index
             break
     return target
@@ -228,7 +227,7 @@ targetList = [Coord(True, tripRadius, 9 * math.pi / 5), Coord(True, tripRadius, 
 def calculateShot(coord):
     result = ""
     hit = False
-    print(coord.radius, " ", coord.theta)
+    #print(coord.radius, " ", coord.theta)
     if coord.radius <= radius:
         if 9 * math.pi / 20 <= coord.theta <= 11 * math.pi / 20:
             result += "20"
@@ -260,18 +259,18 @@ def calculateShot(coord):
     return result
 
 
-def shoot(target, stdevX, stdevY):
+stdevX = 0
+stdevY = 0
+
+
+def shoot(boardState1, boardState2):
+    #print(boardState1, boardState2)
+    target = findTarget1(boardState1, boardState2)
     targetCoord = targetList[target]
     newX = random.gauss(targetCoord.x, stdevX)
     newY = random.gauss(targetCoord.y, stdevY)
     plt.plot(newX, newY, "rx")
     newCoord = Coord(False, newX, newY)
-    #print(newCoord.x, newCoord.y)
+    # print(newCoord.x, newCoord.y)
     result = calculateShot(newCoord)
     return result
-
-
-for i in range(0, 300):
-    print(shoot(findTarget1(test_boardState1, test_boardState2), 25, 50))
-
-plt.show()
