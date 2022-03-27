@@ -61,7 +61,7 @@ def printBoard():
 
 
 def playGame():
-    while boardState != [0, 0, 0, 0, 0, 0, 0]:
+    while boardState[0:7] != [3, 3, 3, 3, 3, 3, 3]:
         throw()
         printBoard()
     print(player + " wins!")
