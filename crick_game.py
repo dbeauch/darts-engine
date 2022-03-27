@@ -1,6 +1,6 @@
-#player1 = input("Player 1 name: ")
-#player2 = input("Player 2 name: ")
-#players = [player1, player2]
+player1 = input("Player 1 name: ")
+player2 = input("Player 2 name: ")
+players = [player1, player2]
 
 boardState1 = [0, 0, 0, 0, 0, 0, 0, 0]
 boardState2 = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -21,52 +21,52 @@ def updateBoard(value):
     else:
         boardHistory2.append(boardState2)
     if value == "15":
-        if (states[thrower][0] == 3) & (states[1 if thrower == 0 else 0][0] != 3):
+        if (states[thrower][0] == 3) and (states[1 if thrower == 0 else 0][0] != 3):
             states[thrower][7] += 15
             return states[thrower]
-        elif (states[thrower][0] == 3) & (states[1 if thrower == 0 else 0][0] == 3):
+        elif (states[thrower][0] == 3) and (states[1 if thrower == 0 else 0][0] == 3):
             return states[thrower]
         states[thrower][0] += 1
     elif value == "16":
-        if (states[thrower][1] == 3) & (states[1 if thrower == 0 else 0][1] != 3):
+        if (states[thrower][1] == 3) and (states[1 if thrower == 0 else 0][1] != 3):
             states[thrower][7] += 16
             return states[thrower]
-        elif (states[thrower][1] == 3) & (states[1 if thrower == 0 else 0][1] == 3):
+        elif (states[thrower][1] == 3) and (states[1 if thrower == 0 else 0][1] == 3):
             return states[thrower]
         states[thrower][1] += 1
     elif value == "17":
-        if (states[thrower][2] == 3) & (states[1 if thrower == 0 else 0][2] != 3):
+        if (states[thrower][2] == 3) and (states[1 if thrower == 0 else 0][2] != 3):
             states[thrower][7] += 17
             return states[thrower]
-        elif (states[thrower][2] == 3) & (states[1 if thrower == 0 else 0][2] == 3):
+        elif (states[thrower][2] == 3) and (states[1 if thrower == 0 else 0][2] == 3):
             return states[thrower]
         states[thrower][2] += 1
     elif value == "18":
-        if (states[thrower][3] == 3) & (states[1 if thrower == 0 else 0][3] != 3):
+        if (states[thrower][3] == 3) and (states[1 if thrower == 0 else 0][3] != 3):
             states[thrower][7] += 18
             return states[thrower]
-        elif (states[thrower][3] == 3) & (states[1 if thrower == 0 else 0][3] == 3):
+        elif (states[thrower][3] == 3) and (states[1 if thrower == 0 else 0][3] == 3):
             return states[thrower]
         states[thrower][3] += 1
     elif value == "19":
-        if (states[thrower][4] == 3) & (states[1 if thrower == 0 else 0][4] != 3):
+        if (states[thrower][4] == 3) and (states[1 if thrower == 0 else 0][4] != 3):
             states[thrower][7] += 19
             return states[thrower]
-        elif (states[thrower][4] == 3) & (states[1 if thrower == 0 else 0][4] == 3):
+        elif (states[thrower][4] == 3) and (states[1 if thrower == 0 else 0][4] == 3):
             return states[thrower]
         states[thrower][4] += 1
     elif value == "20":
-        if (states[thrower][5] == 3) & (states[1 if thrower == 0 else 0][5] != 3):
+        if (states[thrower][5] == 3) and (states[1 if thrower == 0 else 0][5] != 3):
             states[thrower][7] += 20
             return states[thrower]
-        elif (states[thrower][5] == 3) & (states[1 if thrower == 0 else 0][5] == 3):
+        elif (states[thrower][5] == 3) and (states[1 if thrower == 0 else 0][5] == 3):
             return states[thrower]
         states[thrower][5] += 1
     elif value == "25":
-        if (states[thrower][6] == 3) & (states[1 if thrower == 0 else 0][6] != 3):
+        if (states[thrower][6] == 3) and (states[1 if thrower == 0 else 0][6] != 3):
             states[thrower][7] += 25
             return states[thrower]
-        elif (states[thrower][6] == 3) & (states[1 if thrower == 0 else 0][6] == 3):
+        elif (states[thrower][6] == 3) and (states[1 if thrower == 0 else 0][6] == 3):
             return states[thrower]
         states[thrower][6] += 1
     return 0
@@ -107,7 +107,7 @@ def printBoard():
     print("Score:", states[p][7])
 
 
-def playGame():
+def twoPlayers():
     global subTurn
     global turn
     while (boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]) and (boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]):
@@ -142,4 +142,57 @@ def playGame():
         print(player1 + " wins!")
 
 
-#playGame()
+def onePlayer():
+    global subTurn
+    global turn
+    while (boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]) and (boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]):
+        if turn % 2 == 0:
+            throw()
+            subTurn += 1
+            if subTurn % 3 == 0:
+                subTurn -= 3
+                turn += 1
+        else:
+            AIthrow()
+            subTurn += 1
+            if subTurn % 3 == 0:
+                subTurn -= 3
+                turn += 1
+    if boardState1[0:7] == [3, 3, 3, 3, 3, 3, 3]:
+        while boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]:
+            if boardState1[7] >= boardState2[7]:
+                print(player1 + " wins!")
+                return
+            else:
+                if turn % 2 == 0:
+                    throw()
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+                else:
+                    AIthrow()
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+        print("The computer wins!")
+    else:
+        while boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]:
+            if boardState2[7] >= boardState1[7]:
+                print("The computer wins!")
+                return
+            else:
+                if turn % 2 == 0:
+                    throw()
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+                else:
+                    AIthrow()
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+        print(player1 + " wins!")
