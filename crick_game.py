@@ -207,6 +207,65 @@ def onePlayer(difficulty):
         print(player1 + " wins!")
 
 
+def botPlays(difficulty):
+    global subTurn
+    global turn
+    global boardState1
+    global boardState2
+    while (boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]) and (boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]):
+        if turn % 2 == 0:
+            throw("0")
+            subTurn += 1
+            if subTurn % 3 == 0:
+                subTurn -= 3
+                turn += 1
+        else:
+            throw(shoot(boardState1, boardState2, difficulty))
+            subTurn += 1
+            if subTurn % 3 == 0:
+                subTurn -= 3
+                turn += 1
+    if boardState1[0:7] == [3, 3, 3, 3, 3, 3, 3]:
+        while boardState2[0:7] != [3, 3, 3, 3, 3, 3, 3]:
+            if boardState1[7] >= boardState2[7]:
+                print(player1 + " wins!")
+                return
+            else:
+                if turn % 2 == 0:
+                    throw("0")
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+                else:
+                    throw(shoot(boardState1, boardState2, difficulty))
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+        print("The computer wins!")
+    else:
+        while boardState1[0:7] != [3, 3, 3, 3, 3, 3, 3]:
+            if boardState2[7] >= boardState1[7]:
+                print("The computer wins!")
+                print("Printing computer's shots:")
+                return
+            else:
+                if turn % 2 == 0:
+                    throw("0")
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+                else:
+                    throw(shoot(boardState1, boardState2, difficulty))
+                    subTurn += 1
+                    if subTurn % 3 == 0:
+                        subTurn -= 3
+                        turn += 1
+        print(player1 + " wins!")
+
+
 thetheta = np.linspace(0, 2 * np.pi, 100)
 radius0 = 225.5
 radius1 = 170
@@ -286,17 +345,23 @@ plt.plot(x10, y10, 'k-', linewidth=0.5)
 plt.axis('off')
 
 numPlayers = input("Number of players: ")
-player1 = input("Player 1 name: ")
-if numPlayers != "1":
-    player2 = input("Player 2 name: ")
-    players = [player1, player2]
-    twoPlayers()
-else:
+if numPlayers == "0":
+    player1 = ""
     player2 = "Computer"
-    difficulty = int(input("Enter difficulty (1-100): "))
-    while not(0 < difficulty <= 100):
-        difficulty = int(input("Enter difficulty (1-100): "))
     players = [player1, player2]
-    onePlayer(difficulty)
+    botPlays(int(input("Enter difficulty (1-100): ")))
+else:
+    player1 = input("Player 1 name: ")
+    if numPlayers != "1":
+        player2 = input("Player 2 name: ")
+        players = [player1, player2]
+        twoPlayers()
+    else:
+        player2 = "Computer"
+        difficulty = int(input("Enter difficulty (1-100): "))
+        while not(0 < difficulty <= 100):
+            difficulty = int(input("Enter difficulty (1-100): "))
+        players = [player1, player2]
+        onePlayer(difficulty)
 
 plt.show()
