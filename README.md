@@ -3,5 +3,5 @@ This is a collaborative project with [Ethan Buckner](https://github.com/ethan-bu
 
 
 <p align = "center">
-<img width = "500" src = "CircuitLock.jpg">
+<img width = "500" src = "DartBot Example.png">
 </p>
